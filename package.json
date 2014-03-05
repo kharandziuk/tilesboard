@@ -1,0 +1,23 @@
+{
+  "name": "places",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "load-grunt-tasks": "*",
+    "time-grunt": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-less": "*",
+    "grunt-bower-task": "*"
+  },
+  "dependencies": {
+    "express": "3.*"
+  }
+}
