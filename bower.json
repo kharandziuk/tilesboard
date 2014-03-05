@@ -1,0 +1,20 @@
+{
+  "name": "places",
+  "version": "0.0.0",
+  "authors": [
+    "Max Kharandziuk <max.kharandziuk@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "requirejs": "*",
+    "marionette": "~1.6.4"
+  }
+}
