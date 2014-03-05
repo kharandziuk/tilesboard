@@ -25,6 +25,21 @@ require.config(
       exports: 'Marionette'
 )
 
-require(['app', 'common', 'paper'], (Tapp) ->
-  Tapp.start()
+require(['jquery', 'backbone', 'raphael'], ($, Backbone, Raphael) ->
+  $(document).ready(()->
+    class BoardView extends Backbone.View
+      el: '#content'
+      #itemView: Paper.TileView
+      initialize: ()->
+        console.log 1, @paper
+      render: ()->
+        console.log 'tu', this
+        @paper = new Raphael(@el, @$el.width(), @$el.height())
+      events: ()->
+        'click': ()->
+          console.log @
+          @paper.circle(100, 100, 80)
+    boardView = new BoardView()
+    boardView.render()
+  )
 )
