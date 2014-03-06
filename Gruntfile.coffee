@@ -70,6 +70,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask('runApp', ()->require('./app.js'))
 
-  grunt.registerTask('build', ['coffee', 'bower', 'less'])
+  #grunt.registerTask('build', ['coffee', 'bower', 'less'])
+  grunt.registerTask('build', ['coffee', 'less'])
   grunt.registerTask('server', ['build', 'runApp','watch'])
   grunt.registerTask('default', ['server'])

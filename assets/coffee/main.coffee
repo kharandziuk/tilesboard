@@ -28,6 +28,7 @@ require.config(
 require(['jquery', 'backbone', 'raphael'], ($, Backbone, Raphael) ->
   $(document).ready(()->
     class NewsCollection extends Backbone.Collection
+      url: '/tweets/'
       prepare: (paper) ->
         countSum = @reduce(
           (acc, el)-> return acc + el.get('count')
@@ -56,9 +57,13 @@ require(['jquery', 'backbone', 'raphael'], ($, Backbone, Raphael) ->
           attrs = el.attributes
           @paper.rect(attrs.x0, attrs.y0, attrs.width, attrs.height).attr(fill: @colors[i % @colors.length])
         )
-    boardView = new BoardView(
-      collection: new NewsCollection([1..5].map((el)-> count: el * 100))
+    collection = new NewsCollection()
+    collection.fetch(
+      success: ()->
+        boardView = new BoardView(
+          collection: collection
+        )
+        boardView.render()
     )
-    boardView.render()
   )
 )
