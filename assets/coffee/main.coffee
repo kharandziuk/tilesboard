@@ -27,19 +27,38 @@ require.config(
 
 require(['jquery', 'backbone', 'raphael'], ($, Backbone, Raphael) ->
   $(document).ready(()->
+    class NewsCollection extends Backbone.Collection
+      prepare: (paper) ->
+        countSum = @reduce(
+          (acc, el)-> return acc + el.get('count')
+        , 0)
+        last = 0
+        @each((el)->
+          count = el.get('count')
+          el.set('y0', 0)
+          el.set('x0', last)
+          el.set('height', paper.height)
+          width = count * paper.width/countSum
+          el.set('width', width)
+          last += width
+        )
+
+
     class BoardView extends Backbone.View
+      colors: ['#000099', '#FF5050', '#00CC00']
       el: '#content'
       #itemView: Paper.TileView
       initialize: ()->
-        console.log 1, @paper
-      render: ()->
-        console.log 'tu', this
         @paper = new Raphael(@el, @$el.width(), @$el.height())
-      events: ()->
-        'click': ()->
-          console.log @
-          @paper.circle(100, 100, 80)
-    boardView = new BoardView()
+      render: ()->
+        @collection.prepare(@paper)
+        @collection.each((el, i)=>
+          attrs = el.attributes
+          @paper.rect(attrs.x0, attrs.y0, attrs.width, attrs.height).attr(fill: @colors[i % @colors.length])
+        )
+    boardView = new BoardView(
+      collection: new NewsCollection([1..5].map((el)-> count: el * 100))
+    )
     boardView.render()
   )
 )
