@@ -1,5 +1,5 @@
 app.js
 node_modules
 *.swp
-static/js/*
-static/bower_components
+static/
+static/components

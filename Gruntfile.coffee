@@ -11,6 +11,7 @@ module.exports = (grunt) ->
       app: @app
       bower: 'static/components'
       css: 'static/css'
+      less: 'assets/less'
       coffee: 'assets/coffee'
       js: 'static/js'
       img: 'static/img'
@@ -28,6 +29,11 @@ module.exports = (grunt) ->
         coffee:
           files: ['app.coffee', '<%= paths.coffee %>/**/*.coffee']
           tasks: ['coffee']
+        less:
+          files: ['<%= paths.less %>/**/*.less']
+          tasks: ['less']
+          options:
+            nospawn: true
     bower:
       install:
         options:
@@ -38,6 +44,12 @@ module.exports = (grunt) ->
           cleanTargetDir: true
           cleanBowerDir: false
           bowerOptions: {}
+    less:
+      development:
+        options:
+          paths: ['./assets/less'],
+        files:
+          {'<%= paths.css %>/app.css': '<%= paths.less %>/app.less'}
     coffee: {
       frontend:
         options:
@@ -58,6 +70,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask('runApp', ()->require('./app.js'))
 
-  grunt.registerTask('build', ['coffee'])
+  #grunt.registerTask('build', ['coffee', 'bower', 'less'])
+  grunt.registerTask('build', ['coffee', 'less'])
   grunt.registerTask('server', ['build', 'runApp','watch'])
   grunt.registerTask('default', ['server'])

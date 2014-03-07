@@ -1,5 +1,5 @@
 {
-  "name": "places",
+  "name": "scaffold",
   "version": "0.0.0",
   "authors": [
     "Max Kharandziuk <max.kharandziuk@gmail.com>"
@@ -8,13 +8,14 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "assets/components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "jquery": "*",
     "requirejs": "*",
+    "bootstrap": "~3.1.1",
+    "raphael": "~2.1.2",
     "marionette": "~1.6.4"
   }
 }
